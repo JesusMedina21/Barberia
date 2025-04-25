@@ -1,0 +1,72 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@font-face {
+    font-family: 'Thunder';
+    src: url('../assets/fonts/Thunder-ExtraBoldLC.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Thunder';
+    src: url('../assets/fonts/Thunder-BoldLC.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Thunder';
+    src: url('../assets/fonts/Thunder-SemiBoldLC.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@layer base {
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        @apply text-neutral-00
+    }
+
+    html {
+        font-family: "Inter";
+    }   
+}
+
+@layer components {
+
+    .input{
+        @apply w-full px-4 py-2 border-[1px] bg-transparent border-neutral-80 rounded-8 focus:border-primary outline-0 text-neutral-00 placeholder-neutral-60 focus:ring-0
+    }
+
+    .button {
+        @apply h-[50px] bg-primary w-full max-w-[400px] rounded-8 flex justify-center items-center text-neutral-100 font-semibold text-sm
+    }
+
+    .button-toggle-profile {
+        @apply  max-w-40 w-full h-[50px] rounded-8 hover:bg-neutral-90 transition-colors duration-300  ease-in-out
+    }
+
+    .button-activate {
+        @apply bg-primary text-neutral-100 hover:bg-primary
+    }
+
+    .text-link {
+        @apply font-bold underline text-primary text-14
+    }
+
+    .search-item {
+        @apply block hover:bg-neutral-80/50 p-2 rounded-[4px] w-full
+    }
+}

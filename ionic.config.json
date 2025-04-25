@@ -1,0 +1,7 @@
+{
+  "name": "Barbelink",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

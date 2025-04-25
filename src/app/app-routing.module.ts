@@ -1,0 +1,61 @@
+import { NgModule } from '@angular/core';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+
+import { authGuard } from './guard/auth.guard';
+
+const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () =>
+      import('./home/home.component').then((c) => c.HomeComponent),
+  },
+
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./auth/login/login.component').then((c) => c.LoginComponent),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./auth/register/register.component').then(
+        (c) => c.RegisterComponent
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'profile',
+    children: [
+        {
+            path: 'barber/:id',
+            loadComponent: () => import('./profiles/barber-profile/barber-profile.component')
+                .then(c => c.BarberProfileComponent)
+        },
+        { 
+            path: 'client/:id', 
+            loadComponent: () => import('./profiles/client-profile/client-profile.component')
+                .then(c => c.ClientProfileComponent)
+        }
+    ]
+
+},
+{
+    path: 'error',
+    loadComponent: () =>
+        import('./shared/error/error.component').then((c) => c.ErrorComponent),
+},
+
+{
+    path: '**',
+    redirectTo: 'error'  // Redirige a la página de error para rutas no encontradas
+}
+];
+
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
