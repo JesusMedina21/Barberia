@@ -1,4 +1,5 @@
-<app-header></app-header>
+<ion-content>
+  <app-header></app-header>
 
 <br>
 
@@ -26,15 +27,14 @@
     </ul>
   </div>
 </form>
-
 <div class="px-4 md:px-16 lg:px-32">
   <div #fractionSlideCarousel class="fraction-slide-carousel">
-      <h1 class="mx-auto text-white text-3xl">Recomendaciones</h1>
-      <div class="w-full ">
+      <h1 class="mx-auto text-white text-3xl mb-4">Recomendaciones</h1>
+      <div class="w-full overflow-hidden">
           <div class="swiper fraction-slide-carousel swiper-container ">
               <div class="swiper-wrapper">
-                  <div class="swiper-slide" *ngFor="let barberia of barberias">
-                      <div *ngIf="barberia.id"  class="bg-neutral-950 rounded-2xl p-4 h-96 flex flex-col">
+                  <div class="swiper-slide w-80 md:w-96" *ngFor="let barberia of barberias">
+                      <div *ngIf="barberia.id"  class="bg-neutral-950 rounded-2xl p-4 h-auto flex flex-col">
                           <img [src]="barberia.fotoPerfil" alt="{{ barberia.nombreBarberia }}" class="rounded-t-2xl h-40 w-full object-cover">
                           <div class="flex-grow p-4">
                               <h2 class="text-white text-xl font-semibold">{{ barberia.nombreBarberia }}</h2>
@@ -50,7 +50,6 @@
       </div>
   </div>
 </div>
-
 <!--
 
 <div style="width: 100%; height: 500px;">
@@ -61,3 +60,4 @@
 </div>
 
 -->
+</ion-content>

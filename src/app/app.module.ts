@@ -15,8 +15,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule, 
-    FooterComponent,
     HttpClientModule,
+    FooterComponent
   
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

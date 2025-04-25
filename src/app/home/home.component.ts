@@ -9,6 +9,7 @@ import { HeaderComponent } from '../shared/header/header.component';
 //import { GoogleMapsModule } from '@angular/google-maps';
 import { Barberia } from '../models-interfaces/Barberia';
 import { ActivatedRoute } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
     selector: 'app-home',
@@ -16,7 +17,10 @@ import { ActivatedRoute } from '@angular/router';
         CommonModule, 
         HeaderComponent, 
         //GoogleMapsModule, 
-        RouterModule],
+        RouterModule,
+        IonicModule
+    
+],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
@@ -71,27 +75,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
     initSwiper(): void {
         const swiper = new Swiper(this.fractionSlideCarousel.nativeElement.querySelector('.swiper'), {
             loop: true,
+            slidesPerView: 'auto',
+            spaceBetween: 16,
             breakpoints: {
                 640: {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
+                    slidesPerView: 1.5,
+                },
+                768: {
+                    slidesPerView: 2.5,
                 },
                 1024: {
-                    slidesPerView: 2.5,
-                    spaceBetween: 20,
+                    slidesPerView: 3.5,
                 },
             },
-            navigation: {
-                nextEl: this.fractionSlideCarousel.nativeElement.querySelector('.swiper-button-next'),
-                prevEl: this.fractionSlideCarousel.nativeElement.querySelector('.swiper-button-prev'),
-            },
-            pagination: {
-                el: this.fractionSlideCarousel.nativeElement.querySelector('.swiper-pagination'),
-                type: 'fraction',
-                formatFractionCurrent: function (number) {
-                    return number;
-                },
-            },
+            // Opcional: Configuración de navegación y paginación si los usas
+            // navigation: { ... },
+            // pagination: { ... },
         });
     }
     loadBarberias(): void {
