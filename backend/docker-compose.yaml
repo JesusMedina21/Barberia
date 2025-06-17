@@ -1,0 +1,33 @@
+version: '3.8'
+services: 
+  # Django app
+  backend_auth:
+    container_name: barberia_auth
+    build: .
+    volumes:
+      - .:/app # este nombre app, es solo coincidencia con dockerfile
+    ports: 
+      - 8000:8000
+    depends_on:
+      - db_auth
+      - redis_auth
+  # Postgres
+  db_auth:
+    image: postgres
+    container_name: django_auth_api_postgres
+    restart: always
+    enviroment:
+      POSTGRES_DB: boomslag_auth_db
+      POSTGRES_USER: boomslag
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - .dbdata:/var/lib/postgresql
+  # Redis
+  redis_auth:
+    image: redis
+    container_name: django_auth_api_redis
+    posts:
+      - 6379:6379
+  # Kafka
