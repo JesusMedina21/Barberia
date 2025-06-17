@@ -1,0 +1,16 @@
+.ionSearchbar {
+    margin: auto;
+    width: 25rem;
+    --box-shadow: 0 0 0 1px var(--ion-color-primary-shade);
+    --border-radius: 0.5rem;
+}
+
+.ionSearchbar>div>input {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+.ionSearchbar>div>ion-icon {
+    top: 0px !important;
+    height: 100% !important;
+}

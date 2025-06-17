@@ -1,2 +1,86 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
+
+/* src/theme/variables.scss */
+
+/* Tema por defecto (claro) */
+:root {
+  /**
+   * Ionic CSS Variables
+   * ----------------------------------------------------------------------------
+   * Defines CSS variables for Ionic, which are used to control the look
+   * and feel of the app.
+   */
+
+  /*-- Colors --*/
+  /** Primary **/
+  --ion-color-primary: #ffffff; /* Utilizado */
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #3880ff; /* Utilizado */
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #9ec1fc; /* Utilizado */
+  --ion-color-primary-tint: #4c8aff; /* Utilizado */
+
+  /** Secondary **/
+  --ion-color-secondary: #000000; /* Utilizado */
+  --ion-color-secondary-rgb: 61, 194, 255;
+  --ion-color-secondary-contrast: #36afe0; /* Utilizado */
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #36afe0; /* Utilizado */
+  --ion-color-secondary-tint: #50c8ff; /* Utilizado */
+
+  /** Tertiary **/
+  --ion-color-tertiary: #5260ff;
+  --ion-color-tertiary-rgb: 82, 96, 255;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #4854e0;
+  --ion-color-tertiary-tint: #6370ff;
+
+  /* ... puedes añadir más colores como success, warning, danger, light, medium, dark ... */
+
+  /*-- Component Themes --*/
+  /* Estas variables controlan el color de fondo y texto de componentes específicos */
+  --ion-background-color: #ffffff; /* Fondo general de la aplicación */
+  --ion-background-color-rgb: 255, 255, 255;
+  --ion-text-color: #000000; /* Color de texto general */
+  --ion-text-color-rgb: 0, 0, 0;
+
+  /* Fondo del header/toolbar */
+  --ion-toolbar-background: var(--ion-background-color);
+  /* Color del texto del toolbar */
+  --ion-toolbar-text-color: var(--ion-text-color);
+}
+
+/* Tema oscuro */
+@media (prefers-color-scheme: dark) {
+  body {
+    /** Primary **/
+    --ion-color-primary: #000000; /* Utilizado */
+    --ion-color-primary-rgb: 76, 141, 255;
+    --ion-color-primary-contrast: rgb(255, 187, 0); /* Utilizado */
+    --ion-color-primary-contrast-rgb: grey;
+    --ion-color-primary-shade: rgba(128, 128, 128, 0.61); /* Utilizado */
+    --ion-color-primary-tint: rgba(95, 95, 95, 0.61); /* Utilizado */
+
+    --ion-color-secondary: #ffffff; /* Utilizado */
+    --ion-color-secondary-rgb: 61, 194, 255;
+    --ion-color-secondary-contrast: rgb(255, 166, 0); /* Utilizado */
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: rgb(230, 130, 0); /* Utilizado */
+    --ion-color-secondary-tint: rgb(255, 210, 87); /* Utilizado */
+
+    /* ... otras variables de color oscuro ... */
+
+    --ion-color-letter-light: rgb(150, 160, 175);
+
+    /*-- Component Themes for Dark Mode --*/
+    --ion-background-color: #121212;
+    --ion-background-color-rgb: 18, 18, 18;
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255, 255, 255;
+
+    --ion-toolbar-background: #1f1f1f;
+    --ion-toolbar-text-color: #ffffff;
+  }
+}

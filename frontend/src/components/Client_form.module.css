@@ -1,0 +1,72 @@
+.form ion-list {
+    background: transparent;
+}
+
+.form ion-item {
+    --background: transparent;
+    --border-color: transparent;
+}
+
+.form ion-input {
+    margin-top: 1.5rem;
+    height: 0;
+    padding: 0;
+    border: 1px solid var(--ion-color-primary-shade);
+    background-color: var(--ion-color-primary);
+}
+
+.form ion-input input {
+    caret-color: var(--ion-color-secondary) !important;
+}
+
+.form ion-textarea {
+    margin-top: 1.5rem;
+    border: 1px solid var(--ion-color-primary-shade);
+    background-color: var(--ion-color-primary);
+}
+
+.form ion-textarea * {
+    padding: 0;
+}
+
+.form ion-textarea textarea {
+    font-size: 0.9rem !important;
+    padding: 1rem !important;
+    caret-color: var(--ion-color-secondary) !important;
+}
+
+.formButton {
+    width: 100%;
+    margin: 0;
+    padding: 0.7rem 0;
+    --background: transparent;
+    --box-shadow: 0;
+    --transition: 150ms;
+}
+
+.nextButton {
+    margin-top: 1.5rem;
+    background-color: var(--ion-color-secondary-tint);
+}
+
+.nextButton:hover {
+    background-color: var(--ion-color-primary-contrast);
+    /* --background: var(--ion-color-primary-contrast); */
+}
+
+.prevButton {
+    background-color: var(--ion-color-primary-shade);
+}
+
+.prevButton:hover {
+    background-color: var(--ion-color-primary-tint);
+}
+
+.textLight {
+    color: var(--ion-color-letter-light);
+}
+
+.modal {
+    --width: auto;
+    --height: auto;
+}

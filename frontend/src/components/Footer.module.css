@@ -1,0 +1,13 @@
+.footer {
+    height: 1.5rem;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--ion-color-primary-shade);
+    --background: transparent;
+}
+
+ion-footer {
+    box-shadow: none !important;
+}
