@@ -21,7 +21,7 @@ const Home = () => {
 
   const renderForm = () => {
     switch (currentStep) {
-      case 1:
+      case 4:
         return <Barbershop handleNextStep={handleNextStep} />;
       case 2:
         return (
@@ -37,7 +37,7 @@ const Home = () => {
             handlePrevStep={handlePrevStep}
           />
         );
-      case 4:
+      case 1:
         return <Timetable handlePrevStep={handlePrevStep} />;
     }
   };

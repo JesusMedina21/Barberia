@@ -1,4 +1,4 @@
-/* src/tailwind.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ✅ tailwind.css actualizado para v4 */
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+@import "flowbite";

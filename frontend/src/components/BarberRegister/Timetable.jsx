@@ -9,6 +9,7 @@ import {
 import styles from "../Client_form.module.css";
 import Modal from "../Modal.jsx";
 
+import 'flowbite'; // ya está cubierto en tailwind.css
 const Timetable = ({ handlePrevStep }) => {
   const [description, setDescription] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -16,7 +17,7 @@ const Timetable = ({ handlePrevStep }) => {
   const [closingTime, setClosingTime] = useState(undefined);
 
   const numbers = Array.from({ length: 24 }, (_, i) => {
-    if(i < 10) return "0" + i;
+    if (i < 10) return "0" + i;
     return i;
   });
 
@@ -34,15 +35,24 @@ const Timetable = ({ handlePrevStep }) => {
 
         <IonItem>
           <div>
-              <h2>Horario de atención</h2>
-              <p className={styles.textLight}>¿En qué horarios pueden atenderse los clientes?</p>
-              <p className={styles.textLight}>El tiempo máximo para atender a un cliente es de 1 hora</p>
+            <h2>Horario de atención</h2>
+            <p className={styles.textLight}>¿En qué horarios pueden atenderse los clientes?</p>
+            <p className={styles.textLight}>El tiempo máximo para atender a un cliente es de 1 hora</p>
           </div>
         </IonItem>
+        
+        <div className="bg-[#48669e] text-white p-4 rounded-lg shadow-lg text-center">
+          <h1 className="text-3xl font-bold mb-2">¡Hola Tailwind en Ionic!</h1>
+          <p className="text-lg">Esto es un contenedor con estilos de Tailwind CSS.</p>
+        </div>
 
-        <IonButton onClick={() => setShowModal(true)}>
-          Abrir Modal
-        </IonButton>
+
+<button fill="clear"  onClick={() => setShowModal(true)} className="rounded-full bg-amber-500 hover:bg-amber-600 
+          px-3 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm font-medium text-black transition ">
+       El webo
+        </button>
+
+
 
         <IonModal
           className={styles.modal}
@@ -52,8 +62,8 @@ const Timetable = ({ handlePrevStep }) => {
           <Modal>
             <p className={styles.textLight}>Apertura:</p>
 
-            <select 
-              value={openingTime} 
+            <select
+              value={openingTime}
               onIonChange={(e) => setOpeningTime(e.detail.value)}
             >
               {numbers.map(num => <option value={num}>{num}</option>)}
@@ -61,8 +71,8 @@ const Timetable = ({ handlePrevStep }) => {
 
             <p className={styles.textLight}>Cierre:</p>
 
-            <select 
-              value={closingTime} 
+            <select
+              value={closingTime}
               onIonChange={(e) => setClosingTime(e.detail.value)}
             >
               {numbers.map(num => <option value={num}>{num}</option>)}
@@ -140,10 +150,10 @@ const HomePage = () => {
         <IonModal
           isOpen={showModal} // Controla si el modal está abierto o cerrado
           onDidDismiss={() => setShowModal(false)} // Se dispara cuando el modal se cierra (ej. por swipe)
-          // Puedes pasar props al componente interno del modal
-          // Si necesitas pasar una función para cerrar desde el modal, la pasas aquí
-          // y luego la pasas al componente hijo
-          // present y onWillDismiss también son útiles
+        // Puedes pasar props al componente interno del modal
+        // Si necesitas pasar una función para cerrar desde el modal, la pasas aquí
+        // y luego la pasas al componente hijo
+        // present y onWillDismiss también son útiles
         >
           {/* Aquí renderizas el componente que será el contenido de tu modal */}
 
