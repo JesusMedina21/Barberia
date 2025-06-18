@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
-
+import environ
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,6 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+
+env = environ.Env()
+environ.Env.read_env()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-&jp#a!+!=8f)1qrh7#r1p+u2#c4#1$lt4bm&nmwp4k1-o0hc*_'
@@ -30,23 +33,45 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# Segmentacion o division del proyecto
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+PROJECT_APPS = [
     'api.apps.ApiConfig',
-    'rest_framework',
-    'rest_framework_simplejwt', 
-    'rest_framework.authtoken',
-    'drf_spectacular', #django spectacular sirve como documentacion de swagger
+]
+
+THIRD_PARTY_APPS = [
     'corsheaders',
+    'rest_framework',
+    'rest_framework_api',
+    'rest_framework_simplejwt', 
+    'rest_framework_simplejwt.token_blacklist',
+    'rest_framework.authtoken',
+    'ckeditor',
+    'ckeditor_uploader',
+    'channels',
+    'drf_spectacular', #django spectacular sirve como documentacion de swagger
     'pwa'
 ]
+
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'autoParagraph': False
+    }
+}
+
+CKEDITOR_UPLOAD_PATH = "/media/"
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # Debe ir antes de cualquier middleware que maneje solicitudes
@@ -69,6 +94,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -78,7 +104,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'barberia.wsgi.application'
-
+ASGI_APPLICATION = 'barberia.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

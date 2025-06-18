@@ -2,8 +2,10 @@ asgiref==3.8.1
 attrs==25.3.0
 Django==5.2.3
 django-cors-headers==4.7.0
+django-environ==0.12.0
 django-pwa==2.0.1
 djangorestframework==3.16.0
+djangorestframework-api-response==0.1.0
 djangorestframework_simplejwt==5.5.0
 drf-spectacular==0.28.0
 inflection==0.5.1
