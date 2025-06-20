@@ -17,9 +17,9 @@ services:
     container_name: django_auth_api_postgres
     restart: always
     enviroment:
-      POSTGRES_DB: boomslag_auth_db
-      POSTGRES_USER: boomslag
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: barberia
+      POSTGRES_USER: jesus
+      POSTGRES_PASSWORD: Jesus1
     ports:
       - 5432:5432
     volumes:

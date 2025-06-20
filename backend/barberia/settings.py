@@ -111,11 +111,33 @@ ASGI_APPLICATION = 'barberia.asgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'barberia',
+        'USER': 'jesus',
+        'PASSWORD': 'Jesus1',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
+DATABASES=["Default"]["ATOMIC_REQUEST"] = True
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher"
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher"
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher"
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher"
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -155,12 +177,22 @@ USE_THOUSAND_SEPARATOR = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+STATIC_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'media')  # Define la ruta para STATIC_ROOT
+
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Define la ruta para STATIC_ROOT
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Define la ruta para STATIC_ROOT
+
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'build/static'),
 ]
+
+FILE_UPLOAD_PERMISSIONS = 0o640
+
+EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -181,21 +213,29 @@ REST_FRAMEWORK = {
        ),
 
     #PERMISOS
-       'DEFAULT_PERMISSION_CLASS': ('rest_framework.permissions.IsAuthenticated',),
+       'DEFAULT_PERMISSION_CLASS': (
+           'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        ),
     #DRF SPECTACULAR
        'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
   
    }
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend'
+)
+
 SIMPLE_JWT = {
-    'ALGORITHM': 'HS256',
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
+    #'ALGORITHM': 'HS256',
+    'AUTH_HEADER_TYPES': ('JWT',),
+    #'USER_ID_FIELD': 'id',
+    #'USER_ID_CLAIM': 'user_id',
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
-    'JTI_CLAIM': 'jti',
-    'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
+    
+    #'TOKEN_TYPE_CLAIM': 'token_type',
+    #'JTI_CLAIM': 'jti',
+    #'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
+    
     #Tiempo de expiracion del TOKEN
 
     #PARA DESARROLLO ESTA CONFIGURACION
@@ -212,8 +252,6 @@ SIMPLE_JWT = {
     #'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=365*100),  # 100 años (prácticamente nunca)
     # Tiempo de vida del token de refresco cuando se usa para renovar (default: None)
-    'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True,
 
     # Permite renovar el refresh token cada vez que se usa
     'ROTATE_REFRESH_TOKENS': True,
@@ -222,8 +260,39 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
     
     # Actualiza la última hora de inicio de sesión del usuario
-    'UPDATE_LAST_LOGIN': True,
+    #'UPDATE_LAST_LOGIN': True,
 }
+# Libreria que proporciona endpoints para la gestión de usuarios, recuperacion de contraseñas
+# Se integra con servicios de autenticación de terceros, como Google, para permitir el 
+# registro y inicio de sesión a través de redes sociales. 
+DJOSER = {
+    'LOGIN_FIELD': 'email',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
+    'PASSWORD:CHANGED_EMAIL_CONFIRMATION': True,
+    'SEND_CONFIRMATION': True,
+    'SEND_ACTIVATION_EMAIL': True,
+    'SET_USERNAME_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'SET_PASSWORD_RETYPE': True,
+    'USERNAME_RESET_CONFIRM_RETYPE': True,
+    'USERNAME_RESET_CONFIRM_URL': 'email/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'auth/activate/{uid}/{token}',
+    'SOCIAL_AUTH_TOKEN_STRATEGY': 'djoser.social.token.jwt.TokenStrategy',
+    'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': [
+        'http://localhost:8000/google', 
+        'http://localhost:8000/facebook'
+    ],
+    'SERIALIZERS': {
+        #'user_create': 'apps.user.serializers.UserSerializer',
+        #'user': 'app.user.serializers.UseSerializer',
+        #'current_user': 'apps.user.serializers.UserSerializer',
+        #'user_delete': 'djoser.serializers.UserDeleteSerializer'
+    }
+
+
+}
+
 #Configuracion de Swagger
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Barberia API',
