@@ -1,9 +1,14 @@
 asgiref==3.8.1
+async-timeout==5.0.1
 attrs==25.3.0
+channels==4.2.2
 Django==5.2.3
+django-ckeditor==6.7.3
 django-cors-headers==4.7.0
 django-environ==0.12.0
+django-js-asset==3.1.2
 django-pwa==2.0.1
+django-redis==6.0.0
 djangorestframework==3.16.0
 djangorestframework-api-response==0.1.0
 djangorestframework_simplejwt==5.5.0
@@ -14,6 +19,7 @@ jsonschema-specifications==2025.4.1
 psycopg2-binary==2.9.10
 PyJWT==2.9.0
 PyYAML==6.0.2
+redis==6.2.0
 referencing==0.36.2
 rpds-py==0.25.1
 sqlparse==0.5.3

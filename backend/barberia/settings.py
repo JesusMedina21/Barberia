@@ -29,9 +29,11 @@ SECRET_KEY = 'django-insecure-&jp#a!+!=8f)1qrh7#r1p+u2#c4#1$lt4bm&nmwp4k1-o0hc*_
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+# Configura ALLOWED_HOSTS
 ALLOWED_HOSTS = []
-
+# Configura CORS y CSRF
+#CORS_ORIGIN_WHITELIST = os.environ.get('CSRF_ORIGIN_WHITELIST_DEV', '').split(',')
+#CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS_DEV', '').split(',')
 
 # Segmentacion o division del proyecto
 
@@ -112,20 +114,20 @@ ASGI_APPLICATION = 'barberia.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'barberia',
-        'USER': 'jesus',
-        'PASSWORD': 'Jesus1',
-        'HOST': 'db',
+        'NAME': os.environ.get('DB_NAME', 'barberia'),  # Puedes usar variables de entorno si lo deseas
+        'USER': os.environ.get('DB_USER', 'jesus'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'Jesus1'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),  # Cambia esto si es necesario
         'PORT': '5432',
+        'ATOMIC_REQUESTS': True,  # Aquí se establece ATOMIC_REQUESTS
     }
 }
 
-DATABASES=["Default"]["ATOMIC_REQUEST"] = True
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis:6379/0",
+        "LOCATION": "redis://redis:6381/0",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
