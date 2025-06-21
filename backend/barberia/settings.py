@@ -117,7 +117,7 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME', 'barberia'),  # Puedes usar variables de entorno si lo deseas
         'USER': os.environ.get('DB_USER', 'jesus'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'Jesus1'),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),  # Cambia esto si es necesario
+        'HOST': 'host.docker.internal',  # Conexión al host desde Docker
         'PORT': '5432',
         'ATOMIC_REQUESTS': True,  # Aquí se establece ATOMIC_REQUESTS
     }
@@ -179,8 +179,8 @@ USE_THOUSAND_SEPARATOR = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'media')  # Define la ruta para STATIC_ROOT
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Define la ruta para MEDIA_ROOT
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Define la ruta para STATIC_ROOT
@@ -224,7 +224,7 @@ REST_FRAMEWORK = {
    }
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend'
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 SIMPLE_JWT = {
