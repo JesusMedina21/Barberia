@@ -111,18 +111,26 @@ ASGI_APPLICATION = 'barberia.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+#Con Docker y con Postgres
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DB_NAME', 'barberia'),  # Puedes usar variables de entorno si lo deseas
         'USER': os.environ.get('DB_USER', 'jesus'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'Jesus1'),
-        'HOST': 'host.docker.internal',  # Conexión al host desde Docker
+        'HOST':  os.environ.get('DB_HOST', 'db_auth'),  # Conexion con el docker-compose.yaml
         'PORT': '5432',
         'ATOMIC_REQUESTS': True,  # Aquí se establece ATOMIC_REQUESTS
     }
 }
 
+#Sin Docker/SQLITE3
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 
 CACHES = {
     "default": {
@@ -135,10 +143,12 @@ CACHES = {
 }
 
 PASSWORD_HASHERS = [
-    "django.contrib.auth.hashers.Argon2PasswordHasher"
-    "django.contrib.auth.hashers.PBKDF2PasswordHasher"
-    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher"
-    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher"
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+
 ]
 
 # Password validation

@@ -7,6 +7,12 @@ services:
       - .:/app # este nombre app, es solo coincidencia con dockerfile
     ports: 
       - 8000:8000
+    environment: # Añade estas variables de entorno
+      DB_NAME: barberia
+      DB_USER: jesus
+      DB_PASSWORD: Jesus1
+      DB_HOST: db_auth # Esto refuerza que Django debe buscar 'db_auth'
+      DB_PORT: 5432
     depends_on:
       - db_auth
       - redis_auth
