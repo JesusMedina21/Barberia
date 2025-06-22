@@ -1,0 +1,38 @@
+services: 
+  # Django app
+  backend_auth:
+    container_name: barberia_carrito
+    build: .
+    volumes:
+      - .:/app # este nombre app, es solo coincidencia con dockerfile
+    ports: 
+      - 8000:8000
+    environment: # Añade estas variables de entorno
+      DB_NAME: barberia_carrito
+      DB_USER: jesus
+      DB_PASSWORD: Jesus1
+      DB_HOST: db_carrito # Esto refuerza que Django debe buscar 'db_auth'
+      DB_PORT: 5432
+    depends_on:
+      - db_carrito
+      - redis_auth
+  # Postgres
+  db_carrito:
+    image: postgres
+    container_name: carrito_db
+    restart: always
+    environment:
+      POSTGRES_DB: carrito
+      POSTGRES_USER: jesus
+      POSTGRES_PASSWORD: Jesus1
+    ports:
+      - 5432:5432
+    volumes:
+      - .dbdata:/var/lib/postgresql
+  # Redis
+  redis_auth:
+    image: redis
+    container_name: django_carrito_api_redis
+    ports:
+      - 6381:6381
+  # Kafka
