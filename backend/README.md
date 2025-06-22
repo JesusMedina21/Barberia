@@ -8,6 +8,7 @@ Este proyecto se trata de una API REST que es utilizada como Backend para la pla
 
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Python](https://www.python.org/downloads/)
+- [Docker](https://www.docker.com/products/docker-desktop/)
 
 ## Antes de comenzar
 
@@ -29,63 +30,14 @@ python --v
 ## Si estas en Windows
 
 ```
-py -m venv venv 
+docker-compose up 
 ```
 
-```
-.\venv\Scripts\activate
-```
-
-```
-pip install -r requirements.txt
-```
 
 ## Si estas en una Distribucion Linux basada en Debian (Ubuntu, Linux Mint etc...)
 
 ```
-python3 -m venv venv
-```
-
-```
-source venv/bin/activate
-```
-
-```
-pip3 install -r requirements.txt
-```
-
-## Levantar el backend de la plataforma
-
-El backend de la plataforma está construido en Django, para ejecutar el servidor de desarrollo backend debes ejecutar el siguiente comando:
-
-## Si estas en Windows
-
-```
-python manage.py makemigrations 
-```
-
-```
-python manage.py migrate 
-```
-
-```
-
-python manage.py runserver
-```
-
-## Si estas en Linux
-
-```
-python3 manage.py makemigrations 
-```
-
-```
-python3 manage.py migrate 
-```
-
-```
-
-python3 manage.py runserver
+docker compose up
 ```
 
 Te diriges a la url localhost:8000 en el navegador
