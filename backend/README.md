@@ -1,8 +1,8 @@
 # Guía de instalación del proyecto Django
 
-## ¿De que se trata este proyecto/API?
+## ¿De que se trata este proyecto?
 
-Este proyecto se trata de una API REST que es utilizada como Backend para la plataforma Barberia, permitiendo Registrar, Modificar, Eliminar y Listar los Productos. A traves de los metodos GET, POST, PUT y DELETE.
+Este proyecto se esta desarrollando en microservicios en Django para la plataforma Barberia, permitiendo Registrar, Modificar, Eliminar y Listar los Productos. A traves de los metodos GET, POST, PUT y DELETE que proporcionan las diversas APIs de cada servicio.
 
 ## Instalaciones necesarias
 
@@ -22,8 +22,13 @@ python --v
 ```
 
 
-### Comandos para instalar el backend
+### Comandos para correr el backend
 
+- Ejecuta el siguiente comando, segun el monolito que deseas correr 
+
+```
+cd monolito1 o cd monolito2
+```
 
 - Ejecuta el siguiente comando para instalar el proyecto:
 
@@ -34,13 +39,13 @@ docker-compose up
 ```
 
 
-## Si estas en una Distribucion Linux basada en Debian (Ubuntu, Linux Mint etc...)
+## Si estas en cualquier Distribucion Linux/MacOS 
 
 ```
 docker compose up
 ```
 
-Te diriges a la url localhost:8000 en el navegador
+Verificas que URL te arrogo la consola. Por ejemplo 127.0.0.1:8000 o localhost:8000 y te dirigas al navegador con la url arrogada.
 
 
 <h3 align="center">¡Y Listo! Has terminado de correr el backend 🥳</h3>
