@@ -15,42 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include, re_path
-from api.views import *
-
-#DRF JWT
-#from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
-#DRF SPECTACULAR 
-
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-from drf_spectacular.utils import extend_schema_view, extend_schema
-
-#REDIRECCIONAMINENTO
-
-from django.views.generic.base import RedirectView
-
-
-@extend_schema_view(
-    get=extend_schema(exclude=True)  # <- esto la excluye de Swagger
-)
-class HiddenSchemaView(SpectacularAPIView):
-    pass
+from django.urls import path, include
 
 urlpatterns = [
     path('', include('pwa.urls')), #Siempre de primera o sino no funciona
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')), #ESTO LLAMO LOS ENDPOINTS
-    #swagger
-    path('api/docs/', SpectacularSwaggerView.as_view(), name='docs'),
-    #DRF SPECTACULAR SIN EL SCHEMA NO FUNCIONA DOCS
-    path('api/schema/', HiddenSchemaView.as_view(),name='schema'),
-    #DRF JWT
-    path('api/login/', LoginView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth/', include('djoser.urls')), 
+    path('auth/', include('djoser.urls.jwt')),
+    path('auth/', include('djoser.social.urls')),
 
-    #REDIRECCOINAMIENTO
-    re_path(r'^(?!api/docs/).*$', RedirectView.as_view(url='/admin/', permanent=False)),
-    re_path('api/', RedirectView.as_view(url='/api/docs/', permanent=False)),
+    path('api/', include('apps.api.urls')), #ESTO LLAMO LOS ENDPOINTS
 
 ]

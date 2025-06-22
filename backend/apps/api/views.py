@@ -1,8 +1,8 @@
 from rest_framework import viewsets, status, generics
-from barberia.serializers import *
+from apps.api.serializers import *
 
 # from django.contrib.auth.models import User # Modelo original
-from api.models import *
+from apps.api.models import *
 # JWT
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
@@ -12,7 +12,7 @@ from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from api.permissions import *
+from apps.api.permissions import *
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView as BaseTokenRefreshView

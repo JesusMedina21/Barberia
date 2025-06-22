@@ -1,6 +1,6 @@
 from rest_framework import serializers
 # from django.contrib.auth.models import User # Modelo original
-from api.models import *
+from apps.api.models import *
 
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _

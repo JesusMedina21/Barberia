@@ -47,7 +47,7 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
-    'api.apps.ApiConfig',
+    'apps.api',
 ]
 
 THIRD_PARTY_APPS = [
@@ -57,19 +57,22 @@ THIRD_PARTY_APPS = [
     'rest_framework_simplejwt', 
     'rest_framework_simplejwt.token_blacklist',
     'rest_framework.authtoken',
-    'ckeditor',
+    'django_ckeditor_5',
     'ckeditor_uploader',
     'channels',
     'drf_spectacular', #django spectacular sirve como documentacion de swagger
     'pwa'
 ]
 
+
+
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        'autoParagraph': False
+        'autoParagraph': False,
+        'autoGrow_onStartup': True,
     }
 }
 
@@ -348,3 +351,67 @@ PWA_APP_ICONS = [
 ]
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'es'
+
+# Configuración para django-ckeditor-5
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': ['heading', '|', 'bold', 'italic', 'link',
+                    'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+    },
+    'extends': {
+        'blockToolbar': [
+            'paragraph', 'heading1', 'heading2', 'heading3',
+            '|',
+            'bulletedList', 'numberedList',
+            '|',
+            'blockQuote',
+        ],
+        'toolbar': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
+        'code','subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
+                    'bulletedList', 'numberedList', 'todoList', '|', 'blockQuote', 'imageUpload', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
+                    'insertTable',],
+        'image': {
+            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
+            'styles': [
+                'full',
+                'side',
+                'alignLeft',
+                'alignRight',
+                'alignCenter',
+            ]
+        },
+        'table': {
+            'contentToolbar': [ 'tableColumn', 'tableRow', 'mergeTableCells',
+            'tableProperties', 'tableCellProperties' ],
+            'tableProperties': {
+                'borderColors': 'custom',
+                'backgroundColors': 'custom'
+            },
+            'tableCellProperties': {
+                'borderColors': 'custom',
+                'backgroundColors': 'custom'
+            }
+        },
+        'heading' : {
+            'options': [
+                { 'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph' },
+                { 'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1' },
+                { 'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2' },
+                { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
+            ]
+        }
+    },
+    'list': {
+        'properties': {
+            'styles': 'true',
+            'startIndex': 'true',
+            'reversed': 'true',
+        }
+    }
+}
+
+# Configuración para subida de archivos (si usas ckeditor_uploader)
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
