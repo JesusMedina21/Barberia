@@ -24,7 +24,7 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
     path('auth/', include('djoser.social.urls')),
 
-    path('api/', include('apps.user.urls')), #ESTO LLAMO LOS ENDPOINTS
+    path('user/', include('apps.user.urls')), #ESTO LLAMO LOS ENDPOINTS
     path('commerce/', include('apps.commerce.urls')), #ESTO LLAMO LOS ENDPOINTS
     path('turno/', include('apps.turno.urls')), #ESTO LLAMO LOS ENDPOINTS
 

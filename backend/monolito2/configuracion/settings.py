@@ -262,7 +262,7 @@ SIMPLE_JWT = {
 }
 #Configuracion de Swagger
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Barberia API',
+    'TITLE': 'Barberia Cart',
     'DESCRIPTION': 'API REST utilizada como Backend para la plataforma Barberia.',
     'VERSION': '1.0.0',
     'CONTACT': {
@@ -281,8 +281,8 @@ SPECTACULAR_SETTINGS = {
     }
 }
 
-PWA_APP_NAME = 'Barberia API'
-PWA_APP_DESCRIPTION = "Barberia API"
+PWA_APP_NAME = 'Barberia Cart'
+PWA_APP_DESCRIPTION = "Barberia Cart"
 PWA_APP_THEME_COLOR = '#0A0302'
 PWA_APP_BACKGROUND_COLOR = "#1c4216"
 PWA_APP_DISPLAY = 'standalone'
