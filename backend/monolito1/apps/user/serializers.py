@@ -2,14 +2,25 @@ from rest_framework import serializers
 # from django.contrib.auth.models import User # Modelo original
 from apps.user.models import *
 
-from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
-from rest_framework.fields import SerializerMethodField
-from decimal import Decimal
 
-from rest_framework.response import Response
-from rest_framework.exceptions import APIException
+from djoser.serializers import UserCreateSerializer
+
+
+User = get_user_model()
+
+class UserSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        model = User
+        fields = []
+
+class UserListSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        model = User
+        fields = []
+
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

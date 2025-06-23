@@ -1,21 +1,49 @@
-import pika 
+import json, os, django
+from confluent_kafka import Consumer
 
-params = pika.URLParameters('amqps://tqjuxcfa:F5RHgr7e_GNGwD4RetZPH1Bjk6fQtdEb@kebnekaise.lmq.cloudamqp.com/tqjuxcfa')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "configuracion.settings")
+django.setup()
 
-connection = pika.BlockingConnection(params)
+from django.apps import apps
 
-channel = connection.channel()
+Cart = apps.get_model('cart', 'Cart')
 
-channel.queue_declare(queue='admin')
+consumer = Consumer({
+    'bootstrap.servers': 'XXXXXXXXXXXXXX',
+    'security.protocol': 'SASL_SSL',
+    'sasl.username': 'XXXXXXXX',
+    'sasl.password': 'XXXXXXXX',
+    'sasl.mechanism': 'PLAIN',
+    'group.id': 'XXX',
+    'auto.offset.reset': 'earliest'
+})
 
-def callback(ch,method,properties,body):
-    print('Recibido en el admin')
-    print(body)
+consumer.suscribe(['tu topic'])
 
-channel.baisc_consume(queue='admin', on_message_callback=callback)
+while True:
+    msg = consumer.poll(1.0)
 
-print('Se inicializo el consumo')
+    if msg is None:
+        continue
+    if msg.error():
+        print("Consumer error: {}".format(msg.error()))
+        continue
+    print("Mensaje recibido con el valor {}".format(msg.value()))
+    print("Mensaje del Topic  {}".format(msg.topic()))
+    print("Mensaje del  Key {}".format(msg.key()))
 
-channel.start_consuming()
+    topic = msg.topic()
+    value = msg.value()
 
-channel.close()
+    if topic == 'user_registered':
+        if msg.key() == b'created_user':
+            user_data = json.loads(value)
+            user_id = user_data['id']
+
+                                
+            cart, created = Cart.obcjetcs.get_or_create(user_id=user_id, defaults={'total_items': 0})
+            if created:
+                cart.save()
+        pass
+
+consumer.close()

@@ -217,6 +217,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ##Modificado por mi 
 
+ACTIVATE_CAMPAIGN_KEY=os.environ.get('ACTIVATE_CAMPAIGN_KEY')
+ACTIVATE_CAMPAIGN_URL=os.environ.get('ACTIVATE_CAMPAIGN_URL')
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 

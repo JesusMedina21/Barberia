@@ -16,6 +16,10 @@ services:
     depends_on:
       - db_carrito
       - redis_auth
+  #cart_queue:
+  #  build: .
+  #  command: >
+  #    sh -c "python consumer.py"
   # Postgres
   db_carrito:
     image: postgres
