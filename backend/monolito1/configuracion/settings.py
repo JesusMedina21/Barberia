@@ -420,3 +420,6 @@ CKEDITOR_5_CONFIGS = {
 # Configuración para subida de archivos (si usas ckeditor_uploader)
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
+
+# Configuración de RabbitMQ/CloudAMQP
+CLOUDAMQP_URL = os.environ.get('CLOUDAMQP_URL', 'amqps://tu_usuario:tu_contraseña@kebnekaise.lmq.cloudamqp.com/tu_vhost')

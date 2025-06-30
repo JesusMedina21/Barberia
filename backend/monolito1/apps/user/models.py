@@ -30,16 +30,28 @@ def user_banner_directory_path(instance, filename):
     banner_pic_name = 'users/{0}/banner.jpg'.format(str(uuid.uuid4()))
 
 class UserAccountManager(BaseUserManager):
+
     def create_user(self,email,password=None, **extra_fields):
         if not email:
             raise ValueError('Users must have an email address')
         email = self.normalize_email(email)
+
+        # Asegurarse de que el username existe antes de crear el slug
+        if 'username' not in extra_fields:
+            raise ValueError('Username is required')
+            
+        username = extra_fields['username']
 
         def create_slug(username):
             if re.search(pattern_special_characters, username):
                 raise ValueError('Username contains invalid characters')
             username = re.sub(pattern_special_characters, '', username)
             return slugify(username)
+        slug = create_slug(username)
+        if not slug:
+            # Si el slug está vacío, usar parte del email o un UUID
+            slug = slugify(email.split('@')[0]) or str(uuid.uuid4())[:8]
+
         extra_fields['slug']= create_slug(extra_fields['username'])
 
         user = self.model(email=email, **extra_fields)
@@ -53,19 +65,10 @@ class UserAccountManager(BaseUserManager):
         ##Recibe el uuid del usuario en el carrito, asi funciona el microservicio
         ##Es decir guarda 1 usuario en 1 base de datos y esa informacion la comparte a otra base de datos
 
-        ##item={}
-        ##item['id']=str(user.id)
-        ##item['email']=user.email
-        ##item['username']=user.username
-        ##producer.produce(
-        ##    'user_registered',
-        ##    key='create_user',
-        ##    value=json.dumps(item).encode('utf-8')
-        ##)
-        ##producer.flash()
+        # Envía el evento de creación de usuario a RabbitMQ
+        from configuracion.producer import send_user_registered_event
+        send_user_registered_event(user)
 
-
-        
         return user 
 
     def create_superuser(self, email, password, **extra_fields):
@@ -78,6 +81,28 @@ class UserAccountManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            # Generar slug si no existe
+            if not self.username:
+                raise ValueError('Username is required to generate slug')
+                
+            slug = slugify(self.username)
+            if not slug:
+                # Fallback si el slug está vacío
+                slug = slugify(self.email.split('@')[0]) or str(uuid.uuid4())[:8]
+            
+            # Asegurarse de que el slug sea único
+            original_slug = slug
+            counter = 1
+            while User.objects.filter(slug=slug).exclude(id=self.id).exists():
+                slug = f'{original_slug}-{counter}'
+                counter += 1
+                
+            self.slug = slug
+            
+        super().save(*args, **kwargs)
     
 class User(AbstractBaseUser, PermissionsMixin):
     roles = (
