@@ -1,14 +1,13 @@
 # Guía de instalación del proyecto Django
 
-## ¿De que se trata este proyecto?
+## ¿De que se trata este proyecto/API?
 
-Este proyecto se esta desarrollando en microservicios en Django para la plataforma Barberia, permitiendo Registrar, Modificar, Eliminar y Listar los Productos. A traves de los metodos GET, POST, PUT y DELETE que proporcionan las diversas APIs de cada servicio.
+Este proyecto se trata de una API REST que es utilizada como Backend para la plataforma Barberia, permitiendo Registrar, Modificar, Eliminar y Listar los Productos. A traves de los metodos GET, POST, PUT y DELETE.
 
 ## Instalaciones necesarias
 
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Python](https://www.python.org/downloads/)
-- [Docker](https://www.docker.com/products/docker-desktop/)
 
 ## Antes de comenzar
 
@@ -22,30 +21,74 @@ python --v
 ```
 
 
-### Comandos para correr el backend
+### Comandos para instalar el backend
 
-- Ejecuta el siguiente comando, segun el monolito que deseas correr 
-
-```
-cd monolito1 o cd monolito2
-```
 
 - Ejecuta el siguiente comando para instalar el proyecto:
 
 ## Si estas en Windows
 
 ```
-docker-compose up 
+py -m venv venv 
 ```
 
-
-## Si estas en cualquier Distribucion Linux/MacOS 
-
 ```
-docker compose up
+.\venv\Scripts\activate
 ```
 
-Verificas que URL te arrogo la consola. Por ejemplo 127.0.0.1:8000 o localhost:8000 y te dirigas al navegador con la url arrogada.
+```
+pip install -r requirements.txt
+```
+
+## Si estas en una Distribucion Linux basada en Debian (Ubuntu, Linux Mint etc...)
+
+```
+python3 -m venv venv
+```
+
+```
+source venv/bin/activate
+```
+
+```
+pip3 install -r requirements.txt
+```
+
+## Levantar el backend de la plataforma
+
+El backend de la plataforma está construido en Django, para ejecutar el servidor de desarrollo backend debes ejecutar el siguiente comando:
+
+## Si estas en Windows
+
+```
+python manage.py makemigrations 
+```
+
+```
+python manage.py migrate 
+```
+
+```
+
+python manage.py runserver
+```
+
+## Si estas en Linux
+
+```
+python3 manage.py makemigrations 
+```
+
+```
+python3 manage.py migrate 
+```
+
+```
+
+python3 manage.py runserver
+```
+
+Te diriges a la url localhost:8000 en el navegador
 
 
 <h3 align="center">¡Y Listo! Has terminado de correr el backend 🥳</h3>
